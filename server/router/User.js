@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User } = require("../models/user.model.js");
+const { auth } = require("../middleware/auth.js");
 
 router.post("/register", (req, res) => {
 	const user = new User(req.body);
@@ -7,11 +8,11 @@ router.post("/register", (req, res) => {
 	user.save((err, doc) => {
 		if (err) return res.json({ success: false, err });
 		res.status(200).json({
-			success: true,
-			userdata: doc
+			success: true
 		});
 	});
 });
+
 router.post("/login", (req, res) => {
 	const { email, password } = req.body;
 	User.findOne({ email: email }, (err, user) => {
@@ -37,4 +38,27 @@ router.post("/login", (req, res) => {
 		});
 	});
 });
+
+router.get("/auth", auth, (req, res) => {
+	res.status(200).json({
+		isAdmin: req.user.role === 0 ? false : true,
+		isAuth: true,
+		email: req.user.email,
+		name: req.user.name,
+		lastname: req.user.lastname,
+		role: req.user.role,
+		cart: req.user.cart,
+		history: req.user.history
+	});
+});
+
+router.get("/logout", auth, (req, res) => {
+	User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, doc) => {
+		if (err) return res.json({ success: false, err });
+		return res.status(200).send({
+			success: true
+		});
+	});
+});
+
 module.exports = router;
