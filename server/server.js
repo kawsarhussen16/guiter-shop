@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const User = require("./router/User.js");
 const Brand = require("./router/Brand.js");
 const Wood = require("./router/Wood.js");
+const Product = require("./router/Product.js");
 require("dotenv").config();
 
 const app = express();
@@ -26,6 +27,9 @@ app.use("/api/product", Brand);
 //=================================
 //=================================
 app.use("/api/product", Wood);
+//=================================
+//=================================
+app.use("/api/product", Product);
 //=================================
 
 const PORT = process.env.PORT || 3002;
