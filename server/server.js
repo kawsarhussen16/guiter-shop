@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const User = require("./router/User.js");
+const Brand = require("./router/Brand.js");
 require("dotenv").config();
 
 const app = express();
@@ -17,6 +18,10 @@ app.use(cookieParser());
 
 //=================================
 app.use("/api/users", User);
+//=================================
+
+//=================================
+app.use("/api/product", Brand);
 //=================================
 
 const PORT = process.env.PORT || 3002;
