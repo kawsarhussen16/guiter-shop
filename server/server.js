@@ -15,7 +15,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-///////// User Router ///////
+//=================================
 app.use("/api/users", User);
+//=================================
+
 const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
