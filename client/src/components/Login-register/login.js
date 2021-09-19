@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import {
 	update,
-	generateData,
-	isFormValid
+	// generateData,
+	// isFormValid
 } from "../../utils/Form/formActions";
 import { connect } from "react-redux";
 import FormField from "../../utils/Form/formField.js";
